@@ -20,3 +20,11 @@ export async function postStudents(name: string): Promise<Student> {
 		}
 	});
 } 
+
+export async function getStudentByName(name: string): Promise<Student> {
+	return await prisma.student.findUnique({
+		where: {
+			name,
+		}
+	});
+}
