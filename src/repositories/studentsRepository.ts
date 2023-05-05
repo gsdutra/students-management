@@ -19,4 +19,4 @@ export async function postStudents(name: string): Promise<Student> {
 			name,
 		}
 	});
-}
+} 
