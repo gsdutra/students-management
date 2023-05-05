@@ -1,16 +1,17 @@
-import * as studentsRepository from '@/repositories/studentsRepository';
+import * as studentsRepository from '../repositories/studentsRepository';
 import { Student } from '@prisma/client';
 
 export async function getStudents(): Promise<Student[]> {
 
 	const response = await studentsRepository.getStudents();
 
-	if(!response) throw {message: 'No students found', statusCode: 404};
+	if(response.length === 0) throw {message: 'No students found', statusCode: 404};
 
 	return response;
 }
 
 export async function getStudentById(id: number): Promise<Student> {
+
 	const response = await studentsRepository.getStudentById(id);
 
 	if(!response) throw {message: 'No student found', statusCode: 404};
@@ -19,6 +20,8 @@ export async function getStudentById(id: number): Promise<Student> {
 }	
 
 export async function postStudents(name: string): Promise<Student> {
+
+	if(!name) throw {message: 'Name is required', statusCode: 422};
 
 	const studentAlreadyExists = await studentsRepository.getStudentByName(name);
 

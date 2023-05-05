@@ -1,5 +1,5 @@
 import { PrismaClient, Student } from '@prisma/client';
-import prisma from '@/config/database';
+import prisma from '../config/database';
 
 export async function getStudents(): Promise<Student[]> {
 	return await prisma.student.findMany();

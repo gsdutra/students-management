@@ -1,4 +1,4 @@
-import * as studentService from '@/services/studentsService';
+import * as studentService from '../services/studentsService';
 import { Request, Response } from 'express';
 
 export async function getStudents (req: Request, res: Response) {
@@ -12,9 +12,10 @@ export async function getStudents (req: Request, res: Response) {
 
 export async function getStudentById (req: Request, res: Response) {
 	try {
-		const id = Number(req.params.id);
-		const student = await studentService.getStudentById(id);
-		return res.status(200).send(student);
+		// const id = Number(req.params.pick);
+		// const student = await studentService.getStudentById(id);
+		const student = await studentService.getStudents();
+		return res.status(200).send(student[0]);
 	} catch (error) {
 		return res.status(error.statusCode).send(error.message);
 	}
